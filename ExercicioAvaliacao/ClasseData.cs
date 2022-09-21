@@ -11,8 +11,11 @@ namespace ExercicioAvaliacao
        public static DateTime _data;
        public static string _dataNova;
         
+        
         public static DateTime Data { get; set; }
         public static string DataNova { get; set; }
+
+       
               
         
     }

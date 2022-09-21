@@ -16,7 +16,7 @@ namespace ExercicioAvaliacao
         public ContasPagar()
         {
             InitializeComponent();
-            Mostrar();
+            MostrarPagar();
             btnAlterar.Visible = false;
             btnDeletar.Visible = false;
         }
@@ -37,17 +37,7 @@ namespace ExercicioAvaliacao
                         {
                             cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                             cnx.Open();
-                            string sql;
-
-                            if (cbPagar.Checked)
-                            {
-                                sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','" + cbPagar.Text + "','N/E','" + txtTipo.Text + "')";
-                            }
-                            else
-                            {
-                                sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','" + cbReceber.Text + "','N/E','" + txtTipo.Text + "')";
-                            }
-
+                            string sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','Pagar','N/E','" + txtTipo.Text + "')";                           
                             MessageBox.Show("Inserido com sucesso!");
                             MySqlCommand cmd = new MySqlCommand(sql, cnx);
                             cmd.ExecuteNonQuery();
@@ -60,7 +50,7 @@ namespace ExercicioAvaliacao
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    Mostrar();
+                    MostrarPagar();
                     Limpar();
                 }
 
@@ -116,7 +106,7 @@ namespace ExercicioAvaliacao
 
                     }
                     Limpar();
-                    Mostrar();
+                    MostrarPagar();
                 }
                 catch (Exception ex)
                 {
@@ -124,7 +114,7 @@ namespace ExercicioAvaliacao
                 }
             }
         }
-        void Mostrar()
+        void MostrarPagar()
         {
             try
             {
@@ -132,12 +122,12 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select * from contas";
+                    string sql = "select * from contas where situacao = 'Pagar'";
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
-                    dgwContas.DataSource = table;
-                    dgwContas.AutoGenerateColumns = false;
+                    dgwContasPagar.DataSource = table;
+                    dgwContasPagar.AutoGenerateColumns = false;
                 }
             }
             catch (Exception ex)
@@ -148,20 +138,31 @@ namespace ExercicioAvaliacao
 
         private void dgwContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgwContas.CurrentRow.Index != -1)
+            if (dgwContasPagar.CurrentRow.Index != -1)
             {
-                txtIdContas.Text = dgwContas.CurrentRow.Cells[0].Value.ToString();
-                txtDescricao.Text = dgwContas.CurrentRow.Cells[1].Value.ToString();
-                txtNome.Text = dgwContas.CurrentRow.Cells[2].Value.ToString();  
-                txtValor.Text = dgwContas.CurrentRow.Cells[3].Value.ToString(); 
-                txtTipo.Text = dgwContas.CurrentRow.Cells[4].Value.ToString();  
-                //cbPagar.Text = dgwContas.CurrentRow.Cells[5].Value.ToString();  
-                //cbReceber.Text = dgwContas.CurrentRow.Cells[6].Value.ToString();
+                txtIdContas.Text = dgwContasPagar.CurrentRow.Cells[0].Value.ToString();
+                txtDescricao.Text = dgwContasPagar.CurrentRow.Cells[1].Value.ToString();
+                txtNome.Text = dgwContasPagar.CurrentRow.Cells[2].Value.ToString();  
+                txtValor.Text = dgwContasPagar.CurrentRow.Cells[3].Value.ToString(); 
+                txtTipo.Text = dgwContasPagar.CurrentRow.Cells[4].Value.ToString();  
+                cbPago.Text = dgwContasPagar.CurrentRow.Cells[5].Value.ToString(); 
+
+                string teste = cbPago.Text;
+                if (teste == "Pago")
+                {
+                    cbPago.Checked = true;
+
+                }
+                else
+                {
+                    cbPago.Checked = false;
+                }
+               
+                
+
+                //cbRecebido.Text = dgwContas.CurrentRow.Cells[6].Value.ToString();
                 //dtpData.Value = Convert.ToDateTime(dgwContas.CurrentRow.Cells[7].Value.ToString());
 
-                btnInserir.Text = "ADD NEW";
-                btnDeletar.Visible = true;
-                btnAlterar.Visible = true;
                 
             }
         }
@@ -179,8 +180,7 @@ namespace ExercicioAvaliacao
             txtNome.Clear();
             txtTipo.Clear();
             txtValor.Clear();
-            cbPagar.Checked = false;
-            cbReceber.Checked = false;
+            
 
             btnInserir.Text = "INSERIR";
             btnDeletar.Visible = false;

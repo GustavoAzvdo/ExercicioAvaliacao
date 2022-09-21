@@ -95,17 +95,20 @@ namespace ExercicioAvaliacao
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-
+            
+        
             if (MessageBox.Show("Deseja efetuar o pagamento?", "PAGAMENTO", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
 
+               
                 try
                 {
                     using (MySqlConnection cnn = new MySqlConnection())
                     {
+                      
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update contas set pago_recebido = 'Pago' where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "update contas set pago_recebido = 'Pago', dataConclusao = NOW()  where idContasPagar = '" + txtIdContas.Text + "'";
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Pagamento efetuado com sucesso!");
@@ -125,6 +128,7 @@ namespace ExercicioAvaliacao
 
         private void btnReceber_Click(object sender, EventArgs e)
         {
+           
             if (MessageBox.Show("Confirmar o recebimento?", "RECEBIMENTO", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
 
@@ -132,9 +136,11 @@ namespace ExercicioAvaliacao
                 {
                     using (MySqlConnection cnn = new MySqlConnection())
                     {
+                       
+                        
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update contas set pago_recebido = 'Recebido' where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "update contas set pago_recebido = 'Recebido',dataConclusao = NOW() where idContasPagar = '" + txtIdContas.Text + "'";
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Dinheiro recebido com sucesso!");
@@ -148,7 +154,7 @@ namespace ExercicioAvaliacao
                 
                
             }
-            MostrarReceber();
+             MostrarReceber();
         }
        
         

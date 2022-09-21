@@ -49,51 +49,46 @@
             // dgwContasPagar
             // 
             this.dgwContasPagar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwContasPagar.Location = new System.Drawing.Point(44, 59);
-            this.dgwContasPagar.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwContasPagar.Location = new System.Drawing.Point(33, 48);
             this.dgwContasPagar.Name = "dgwContasPagar";
             this.dgwContasPagar.RowHeadersWidth = 51;
-            this.dgwContasPagar.Size = new System.Drawing.Size(667, 172);
+            this.dgwContasPagar.Size = new System.Drawing.Size(500, 140);
             this.dgwContasPagar.TabIndex = 0;
             this.dgwContasPagar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwContasPagar_CellDoubleClick);
             // 
             // dgwContasReceber
             // 
             this.dgwContasReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwContasReceber.Location = new System.Drawing.Point(44, 269);
-            this.dgwContasReceber.Margin = new System.Windows.Forms.Padding(4);
+            this.dgwContasReceber.Location = new System.Drawing.Point(33, 219);
             this.dgwContasReceber.Name = "dgwContasReceber";
             this.dgwContasReceber.RowHeadersWidth = 51;
-            this.dgwContasReceber.Size = new System.Drawing.Size(667, 172);
+            this.dgwContasReceber.Size = new System.Drawing.Size(500, 140);
             this.dgwContasReceber.TabIndex = 1;
             this.dgwContasReceber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwContasReceber_CellDoubleClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 39);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(33, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 16);
+            this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Contas à Pagar";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 246);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(33, 200);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 16);
+            this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Contas à Receber";
             // 
             // btnPagar
             // 
-            this.btnPagar.Location = new System.Drawing.Point(731, 59);
-            this.btnPagar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPagar.Location = new System.Drawing.Point(548, 48);
             this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(159, 36);
+            this.btnPagar.Size = new System.Drawing.Size(119, 29);
             this.btnPagar.TabIndex = 4;
             this.btnPagar.Text = "PAGAR";
             this.btnPagar.UseVisualStyleBackColor = true;
@@ -101,10 +96,9 @@
             // 
             // btnReceber
             // 
-            this.btnReceber.Location = new System.Drawing.Point(731, 269);
-            this.btnReceber.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReceber.Location = new System.Drawing.Point(548, 219);
             this.btnReceber.Name = "btnReceber";
-            this.btnReceber.Size = new System.Drawing.Size(159, 36);
+            this.btnReceber.Size = new System.Drawing.Size(119, 29);
             this.btnReceber.TabIndex = 4;
             this.btnReceber.Text = "RECEBER";
             this.btnReceber.UseVisualStyleBackColor = true;
@@ -112,10 +106,9 @@
             // 
             // btnContasPagar
             // 
-            this.btnContasPagar.Location = new System.Drawing.Point(861, 463);
-            this.btnContasPagar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnContasPagar.Location = new System.Drawing.Point(646, 376);
             this.btnContasPagar.Name = "btnContasPagar";
-            this.btnContasPagar.Size = new System.Drawing.Size(159, 36);
+            this.btnContasPagar.Size = new System.Drawing.Size(119, 29);
             this.btnContasPagar.TabIndex = 4;
             this.btnContasPagar.Text = "Contas a Pagar";
             this.btnContasPagar.UseVisualStyleBackColor = true;
@@ -123,10 +116,9 @@
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(44, 465);
-            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPesquisar.Location = new System.Drawing.Point(33, 378);
             this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(159, 34);
+            this.btnPesquisar.Size = new System.Drawing.Size(119, 28);
             this.btnPesquisar.TabIndex = 5;
             this.btnPesquisar.Text = "PESQUISAR";
             this.btnPesquisar.UseVisualStyleBackColor = true;
@@ -134,56 +126,63 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(940, 75);
+            this.label3.Location = new System.Drawing.Point(705, 61);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 16);
+            this.label3.Size = new System.Drawing.Size(21, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "ID:";
             // 
             // txtIdContas
             // 
-            this.txtIdContas.Location = new System.Drawing.Point(981, 69);
+            this.txtIdContas.Enabled = false;
+            this.txtIdContas.Location = new System.Drawing.Point(736, 56);
+            this.txtIdContas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIdContas.Name = "txtIdContas";
-            this.txtIdContas.Size = new System.Drawing.Size(53, 22);
+            this.txtIdContas.Size = new System.Drawing.Size(41, 20);
             this.txtIdContas.TabIndex = 8;
             // 
             // txtPesquisa2
             // 
-            this.txtPesquisa2.Location = new System.Drawing.Point(822, 317);
+            this.txtPesquisa2.Location = new System.Drawing.Point(616, 268);
+            this.txtPesquisa2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPesquisa2.Name = "txtPesquisa2";
-            this.txtPesquisa2.Size = new System.Drawing.Size(212, 22);
+            this.txtPesquisa2.Size = new System.Drawing.Size(160, 20);
             this.txtPesquisa2.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(738, 105);
+            this.label4.Location = new System.Drawing.Point(554, 97);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 16);
+            this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "PESQUISA:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(738, 323);
+            this.label5.Location = new System.Drawing.Point(554, 272);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 16);
+            this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "PESQUISA:";
             // 
             // txtPesquisa
             // 
-            this.txtPesquisa.Location = new System.Drawing.Point(822, 99);
+            this.txtPesquisa.Location = new System.Drawing.Point(616, 92);
+            this.txtPesquisa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPesquisa.Name = "txtPesquisa";
-            this.txtPesquisa.Size = new System.Drawing.Size(212, 22);
+            this.txtPesquisa.Size = new System.Drawing.Size(160, 20);
             this.txtPesquisa.TabIndex = 9;
             // 
             // ControleContas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 548);
+            this.ClientSize = new System.Drawing.Size(800, 445);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPesquisa);
@@ -198,7 +197,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgwContasReceber);
             this.Controls.Add(this.dgwContasPagar);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ControleContas";
             this.Text = "ControleContas";
             ((System.ComponentModel.ISupportInitialize)(this.dgwContasPagar)).EndInit();
