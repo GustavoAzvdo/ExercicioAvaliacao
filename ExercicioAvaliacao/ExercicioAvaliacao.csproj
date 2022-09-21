@@ -95,6 +95,7 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClasseData.cs" />
     <Compile Include="ContasPagar.cs">
       <SubType>Form</SubType>
     </Compile>

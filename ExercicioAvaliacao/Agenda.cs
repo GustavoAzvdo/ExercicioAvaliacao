@@ -17,40 +17,43 @@ namespace ExercicioAvaliacao
         {
             InitializeComponent();
             Mostrar();
-            
+            btnAlterar.Visible = false;            
+            btnDeletar.Visible = false;
+
         }
         
 
         string continua = "yes";
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            DateTime data = dtpData.Value;
-            string dataCurta = data.ToShortDateString();
-            string[] vetData = dataCurta.Split('/');
-            string dataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
 
+            Data();
             verificaVazio();
 
-            if(continua == "yes")
+            if(btnInserir.Text == "INSERIR" && continua == "yes")
             {
-                try
+                if(MessageBox.Show("Deseja realmente inserir?","INSERIR",MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    
-                    using (MySqlConnection cnx = new MySqlConnection())
+                    try
                     {
-                        cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
-                        cnx.Open();
-                        string sql = "insert into agenda (titulo,hora,data,descricao) values ('" + txtTitulo.Text + "','" + cmbHora.Text + "','" + dataNova +"','"+ rtbDescricao.Text + "')";
-                        MessageBox.Show("Inserido com sucesso!");
-                        MySqlCommand cmd = new MySqlCommand(sql, cnx);
-                        cmd.ExecuteNonQuery();
+
+                        using (MySqlConnection cnx = new MySqlConnection())
+                        {
+                            cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
+                            cnx.Open();
+                            string sql = "insert into agenda (titulo,hora,data,descricao) values ('" + txtTitulo.Text + "','" + cmbHora.Text + "','" + ClasseData.DataNova + "','" + rtbDescricao.Text + "')";
+                            MessageBox.Show("Inserido com sucesso!");
+                            MySqlCommand cmd = new MySqlCommand(sql, cnx);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
+                
                 
             }
             Mostrar();
@@ -62,7 +65,7 @@ namespace ExercicioAvaliacao
             {
                 using (MySqlConnection cnx = new MySqlConnection())
                 {
-                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
+                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
                     string sql = "select * from agenda";
                     DataTable table = new DataTable();
@@ -87,40 +90,70 @@ namespace ExercicioAvaliacao
                 cmbHora.Text = dgwAgenda.CurrentRow.Cells[2].Value.ToString(); 
                 dtpData.Value = Convert.ToDateTime(dgwAgenda.CurrentRow.Cells[3].Value.ToString());
                 rtbDescricao.Text = dgwAgenda.CurrentRow.Cells[4].Value.ToString();
+
+                btnInserir.Text = "ADD NEW";    
+                btnDeletar.Visible = true;      
+                btnAlterar.Visible = true;
+                txtPesquisar.Clear();        
             }
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (MySqlConnection cnn = new MySqlConnection())
-                {
-                    cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
-                    cnn.Open();
-                    string sql = "update agenda set hora = '" + cmbHora.Text + "',titulo = '" + txtTitulo.Text + "', descricao = '" + rtbDescricao.Text + "', data = '" + dtpData.Value + "' where id = '" + txtIdAgenda.Text + "'";
-                    MySqlCommand cmd = new MySqlCommand(sql, cnn);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Atualizado com sucesso");
+            Data();
 
-                }
-            }
-            catch (Exception ex)
+            if(MessageBox.Show("Deseja realmente Alterar?","ALTERAR",MessageBoxButtons.YesNo) == DialogResult.Yes) 
             {
-                MessageBox.Show(ex.Message);
+
+                try
+                {
+                    using (MySqlConnection cnn = new MySqlConnection())
+                    {
+                        cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
+                        cnn.Open();
+                        string sql = "update agenda set hora = '" + cmbHora.Text + "',titulo = '" + txtTitulo.Text + "', descricao = '" + rtbDescricao.Text + "', data = '" + ClasseData.DataNova + "' where idAgenda = '" + txtIdAgenda.Text + "'";
+                        MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Atualizado com sucesso");
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+
             }
+            Mostrar();
+            
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            try
+            if(MessageBox.Show("Deseja realmente deletar?","Deletar",MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                try
+                {
+                    using (MySqlConnection cnn = new MySqlConnection())
+                    {
+                        cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
+                        cnn.Open();
+                        string sql = "delete from agenda where idAgenda = '" + txtIdAgenda.Text + "'";
+                        MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Deletado com sucesso!");
 
+                    }
+                    Limpar();
+                    Mostrar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+           
         }
         
         void verificaVazio()
@@ -141,9 +174,87 @@ namespace ExercicioAvaliacao
             txtIdAgenda.Clear();
             txtTitulo.Clear();
             rtbDescricao.Clear();
+            txtPesquisar.Clear();
             cmbHora.Text = "";
-            
+
+            btnInserir.Text = "INSERIR";        
+            btnDeletar.Visible = false;         
+            btnAlterar.Visible = false;
+
+
         }
-       
+        void Data()
+        {
+            ClasseData.Data = dtpData.Value;
+            string dataCurta = ClasseData.Data.ToShortDateString();
+            string[] vetData = dataCurta.Split('/');
+            ClasseData.DataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
+        }
+
+
+        private void txtPesquisar_TextChanged(object sender, EventArgs e)
+        {
+            string pesquisa = txtPesquisar.Text;
+            var i = pesquisa;
+            
+
+            //string letra = txtPesquisar.Text;
+            //string i = letra;
+
+            if (i == pesquisa)
+            {
+                try
+                {
+                
+                    using (MySqlConnection cnx = new MySqlConnection())
+                    {
+                        cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                        cnx.Open();
+                        string sql = "select * from agenda where titulo like '" + txtPesquisar.Text + "%'";
+                        DataTable table = new DataTable();
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
+                        adapter.Fill(table);
+                        dgwAgenda.DataSource = table;
+                        dgwAgenda.AutoGenerateColumns = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+               
+            }
+
+            else 
+            {
+
+                try
+                {
+                    using (MySqlConnection cnx = new MySqlConnection())
+                    {
+                        cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                        cnx.Open();
+                        string sql = "select * from agenda where data like '" + txtPesquisar.Text + "%'";
+                        DataTable table = new DataTable();
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
+                        adapter.Fill(table);
+                        dgwAgenda.DataSource = table;
+                        dgwAgenda.AutoGenerateColumns = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
+            }
+          
+
+
+
+
+
+        }
+
     }
 }
