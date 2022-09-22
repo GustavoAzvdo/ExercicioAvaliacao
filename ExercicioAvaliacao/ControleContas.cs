@@ -124,6 +124,10 @@ namespace ExercicioAvaliacao
 
             }
             MostrarPagar();
+
+            //ContasPagar cP = new ContasPagar();
+            //cP.Show();    
+
         }
 
         private void btnReceber_Click(object sender, EventArgs e)
