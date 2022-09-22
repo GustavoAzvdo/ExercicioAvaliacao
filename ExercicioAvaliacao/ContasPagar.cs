@@ -50,18 +50,21 @@ namespace ExercicioAvaliacao
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    MostrarPagar();
-                    Limpar();
+                   
                 }
 
                     
             }
-          
+            MostrarPagar();
+            Limpar();
+
+           
         }
         
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
+            verificaVazio();
             Data();
 
             if (MessageBox.Show("Deseja realmente Alterar?", "ALTERAR", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -87,6 +90,12 @@ namespace ExercicioAvaliacao
 
 
             }
+            txtIdContas.Clear();
+            txtDescricao.Clear();
+            txtNome.Clear();
+            txtTipo.Clear();
+            txtValor.Clear();
+
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
@@ -138,37 +147,37 @@ namespace ExercicioAvaliacao
 
         private void dgwContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+           
             if (dgwContasPagar.CurrentRow.Index != -1)
             {
                 txtIdContas.Text = dgwContasPagar.CurrentRow.Cells[0].Value.ToString();
-                txtDescricao.Text = dgwContasPagar.CurrentRow.Cells[1].Value.ToString();
-                txtNome.Text = dgwContasPagar.CurrentRow.Cells[2].Value.ToString();  
-                txtValor.Text = dgwContasPagar.CurrentRow.Cells[3].Value.ToString(); 
-                txtTipo.Text = dgwContasPagar.CurrentRow.Cells[4].Value.ToString();  
-                cbPago.Text = dgwContasPagar.CurrentRow.Cells[5].Value.ToString(); 
+                txtNome.Text = dgwContasPagar.CurrentRow.Cells[1].Value.ToString();
+                txtDescricao.Text = dgwContasPagar.CurrentRow.Cells[2].Value.ToString();
+                txtValor.Text = dgwContasPagar.CurrentRow.Cells[3].Value.ToString();
+                dtpDataVencimento.Value = Convert.ToDateTime(dgwContasPagar.CurrentRow.Cells[4].Value.ToString());           
+                cbPago.Text = dgwContasPagar.CurrentRow.Cells[7].Value.ToString();
+                txtTipo.Text = dgwContasPagar.CurrentRow.Cells[8].Value.ToString();
 
-                string teste = cbPago.Text;
-                if (teste == "Pago")
+                string pago = cbPago.Text;
+
+                if (pago == "Pago")
                 {
                     cbPago.Checked = true;
 
                 }
-                else
+                else if(pago == "N/E")
                 {
+                    cbPago.Text = "Pago";
                     cbPago.Checked = false;
                 }
-               
-                
-
-                //cbRecebido.Text = dgwContas.CurrentRow.Cells[6].Value.ToString();
-                //dtpData.Value = Convert.ToDateTime(dgwContas.CurrentRow.Cells[7].Value.ToString());
-
-                
+                btnInserir.Text = "ADD NEW";
+                btnDeletar.Visible = true;
+                btnAlterar.Visible = true;
             }
         }
         void Data()
         {
-            ClasseData.Data = dtpData.Value;
+            ClasseData.Data = dtpDataVencimento.Value;
             string dataCurta = ClasseData.Data.ToShortDateString();
             string[] vetData = dataCurta.Split('/');
             ClasseData.DataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
@@ -198,5 +207,7 @@ namespace ExercicioAvaliacao
                 continua = "yes";
             }
         }
+
+       
     }
 }
