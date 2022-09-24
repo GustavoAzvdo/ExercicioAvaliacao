@@ -189,9 +189,9 @@ namespace ExercicioAvaliacao
 
 
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
