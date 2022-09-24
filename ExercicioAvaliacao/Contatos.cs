@@ -31,6 +31,7 @@ namespace ExercicioAvaliacao
             {
                 try
                 {
+                    addEndereco();
                     using (MySqlConnection cnx = new MySqlConnection())
                     {
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero datetime = true";
@@ -56,15 +57,7 @@ namespace ExercicioAvaliacao
                     MessageBox.Show(ex.Message);
 
                 }
-                try
-                {
-                    addEndereco();
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                
 
 
             }
@@ -125,7 +118,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open(); 
-                    string sql = "select idContato,nome,cpf,dataNascimento,email,sexo,cep,logradouro,numeroCasa,complemento,bairro,cidade,uf from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
+                    string sql = "select * from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
