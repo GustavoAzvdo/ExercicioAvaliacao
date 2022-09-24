@@ -41,7 +41,6 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtLogradouro = new System.Windows.Forms.TextBox();
-            this.txtCidade = new System.Windows.Forms.TextBox();
             this.txtBairro = new System.Windows.Forms.TextBox();
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.txtNumeroCasa = new System.Windows.Forms.TextBox();
@@ -65,6 +64,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.rbMasculino = new System.Windows.Forms.RadioButton();
             this.rbFeminino = new System.Windows.Forms.RadioButton();
+            this.txtCidade = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTelefones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContatos)).BeginInit();
             this.panel1.SuspendLayout();
@@ -84,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 38);
+            this.label1.Location = new System.Drawing.Point(24, 18);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 16);
@@ -114,7 +114,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 259);
+            this.label4.Location = new System.Drawing.Point(28, 259);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 16);
@@ -124,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 302);
+            this.label5.Location = new System.Drawing.Point(24, 302);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 16);
@@ -134,7 +134,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(385, 300);
+            this.label6.Location = new System.Drawing.Point(362, 302);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 16);
@@ -144,7 +144,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 344);
+            this.label7.Location = new System.Drawing.Point(28, 341);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 16);
@@ -154,7 +154,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(104, 221);
+            this.label8.Location = new System.Drawing.Point(28, 224);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 16);
@@ -174,7 +174,7 @@
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(153, 34);
+            this.txtID.Location = new System.Drawing.Point(142, 12);
             this.txtID.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(60, 22);
@@ -182,7 +182,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(153, 73);
+            this.txtNome.Location = new System.Drawing.Point(142, 70);
             this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(847, 22);
@@ -190,34 +190,23 @@
             // 
             // txtLogradouro
             // 
-            this.txtLogradouro.Enabled = false;
-            this.txtLogradouro.Location = new System.Drawing.Point(148, 255);
-            this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLogradouro.Location = new System.Drawing.Point(142, 256);
+            this.txtLogradouro.Margin = new System.Windows.Forms.Padding(5);
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Size = new System.Drawing.Size(472, 22);
             this.txtLogradouro.TabIndex = 10;
             // 
-            // txtCidade
-            // 
-            this.txtCidade.Enabled = false;
-            this.txtCidade.Location = new System.Drawing.Point(148, 300);
-            this.txtCidade.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCidade.Name = "txtCidade";
-            this.txtCidade.Size = new System.Drawing.Size(223, 22);
-            this.txtCidade.TabIndex = 10;
-            // 
             // txtBairro
             // 
-            this.txtBairro.Enabled = false;
-            this.txtBairro.Location = new System.Drawing.Point(449, 296);
-            this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBairro.Location = new System.Drawing.Point(442, 296);
+            this.txtBairro.Margin = new System.Windows.Forms.Padding(5);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(176, 22);
             this.txtBairro.TabIndex = 10;
             // 
             // txtCEP
             // 
-            this.txtCEP.Location = new System.Drawing.Point(149, 218);
+            this.txtCEP.Location = new System.Drawing.Point(142, 218);
             this.txtCEP.Margin = new System.Windows.Forms.Padding(4);
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(159, 22);
@@ -226,7 +215,7 @@
             // 
             // txtNumeroCasa
             // 
-            this.txtNumeroCasa.Location = new System.Drawing.Point(532, 333);
+            this.txtNumeroCasa.Location = new System.Drawing.Point(525, 340);
             this.txtNumeroCasa.Margin = new System.Windows.Forms.Padding(4);
             this.txtNumeroCasa.Name = "txtNumeroCasa";
             this.txtNumeroCasa.Size = new System.Drawing.Size(93, 22);
@@ -236,15 +225,15 @@
             // 
             this.cmbUF.Enabled = false;
             this.cmbUF.FormattingEnabled = true;
-            this.cmbUF.Location = new System.Drawing.Point(149, 333);
+            this.cmbUF.Location = new System.Drawing.Point(142, 333);
             this.cmbUF.Margin = new System.Windows.Forms.Padding(4);
             this.cmbUF.Name = "cmbUF";
-            this.cmbUF.Size = new System.Drawing.Size(118, 24);
+            this.cmbUF.Size = new System.Drawing.Size(119, 24);
             this.cmbUF.TabIndex = 11;
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(25, 27);
+            this.btnInserir.Location = new System.Drawing.Point(42, 27);
             this.btnInserir.Margin = new System.Windows.Forms.Padding(4);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(161, 34);
@@ -255,7 +244,7 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(225, 27);
+            this.btnAlterar.Location = new System.Drawing.Point(242, 27);
             this.btnAlterar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(161, 34);
@@ -265,7 +254,7 @@
             // 
             // btnDeletar
             // 
-            this.btnDeletar.Location = new System.Drawing.Point(425, 27);
+            this.btnDeletar.Location = new System.Drawing.Point(436, 27);
             this.btnDeletar.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeletar.Name = "btnDeletar";
             this.btnDeletar.Size = new System.Drawing.Size(161, 34);
@@ -276,7 +265,7 @@
             // dgwTelefones
             // 
             this.dgwTelefones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwTelefones.Location = new System.Drawing.Point(647, 149);
+            this.dgwTelefones.Location = new System.Drawing.Point(650, 145);
             this.dgwTelefones.Margin = new System.Windows.Forms.Padding(4);
             this.dgwTelefones.Name = "dgwTelefones";
             this.dgwTelefones.RowHeadersWidth = 51;
@@ -295,7 +284,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(153, 108);
+            this.txtEmail.Location = new System.Drawing.Point(142, 108);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(472, 22);
@@ -304,7 +293,7 @@
             // dgwContatos
             // 
             this.dgwContatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwContatos.Location = new System.Drawing.Point(25, 90);
+            this.dgwContatos.Location = new System.Drawing.Point(25, 85);
             this.dgwContatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgwContatos.Name = "dgwContatos";
             this.dgwContatos.RowHeadersWidth = 51;
@@ -313,7 +302,7 @@
             // 
             // txtPesquisar
             // 
-            this.txtPesquisar.Location = new System.Drawing.Point(616, 38);
+            this.txtPesquisar.Location = new System.Drawing.Point(618, 39);
             this.txtPesquisar.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(325, 22);
@@ -338,7 +327,7 @@
             this.panel1.Controls.Add(this.btnDeletar);
             this.panel1.Controls.Add(this.btnAlterar);
             this.panel1.Controls.Add(this.btnInserir);
-            this.panel1.Location = new System.Drawing.Point(31, 401);
+            this.panel1.Location = new System.Drawing.Point(30, 414);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(970, 276);
@@ -356,7 +345,7 @@
             // 
             // txtComplemento
             // 
-            this.txtComplemento.Location = new System.Drawing.Point(149, 371);
+            this.txtComplemento.Location = new System.Drawing.Point(142, 372);
             this.txtComplemento.Margin = new System.Windows.Forms.Padding(4);
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(476, 22);
@@ -374,7 +363,7 @@
             // 
             // txtCPF
             // 
-            this.txtCPF.Location = new System.Drawing.Point(153, 145);
+            this.txtCPF.Location = new System.Drawing.Point(142, 138);
             this.txtCPF.Margin = new System.Windows.Forms.Padding(4);
             this.txtCPF.Name = "txtCPF";
             this.txtCPF.Size = new System.Drawing.Size(163, 22);
@@ -392,7 +381,7 @@
             // 
             // dtpData
             // 
-            this.dtpData.Location = new System.Drawing.Point(153, 183);
+            this.dtpData.Location = new System.Drawing.Point(142, 182);
             this.dtpData.Margin = new System.Windows.Forms.Padding(4);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(472, 22);
@@ -432,11 +421,19 @@
             this.rbFeminino.Text = "Feminino";
             this.rbFeminino.UseVisualStyleBackColor = true;
             // 
+            // txtCidade
+            // 
+            this.txtCidade.Location = new System.Drawing.Point(142, 296);
+            this.txtCidade.Name = "txtCidade";
+            this.txtCidade.Size = new System.Drawing.Size(159, 22);
+            this.txtCidade.TabIndex = 19;
+            // 
             // Contatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 706);
+            this.ClientSize = new System.Drawing.Size(1038, 703);
+            this.Controls.Add(this.txtCidade);
             this.Controls.Add(this.rbFeminino);
             this.Controls.Add(this.rbMasculino);
             this.Controls.Add(this.label15);
@@ -450,7 +447,6 @@
             this.Controls.Add(this.txtNumeroCasa);
             this.Controls.Add(this.txtCEP);
             this.Controls.Add(this.txtBairro);
-            this.Controls.Add(this.txtCidade);
             this.Controls.Add(this.txtLogradouro);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.txtID);
@@ -495,7 +491,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.TextBox txtLogradouro;
-        private System.Windows.Forms.TextBox txtCidade;
         private System.Windows.Forms.TextBox txtBairro;
         private System.Windows.Forms.TextBox txtCEP;
         private System.Windows.Forms.TextBox txtNumeroCasa;
@@ -519,5 +514,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RadioButton rbMasculino;
         private System.Windows.Forms.RadioButton rbFeminino;
+        private System.Windows.Forms.TextBox txtCidade;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Correios.Net;
+﻿
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -26,12 +26,11 @@ namespace ExercicioAvaliacao
         {
 
             Data();
+
             try
             {
-
                 try
                 {
-                    addEndereco();
                     using (MySqlConnection cnx = new MySqlConnection())
                     {
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero datetime = true";
@@ -39,12 +38,12 @@ namespace ExercicioAvaliacao
                         string sql;
                         if (rbMasculino.Checked)
                         {
-                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',(select idEndereco from endereco where CEP = " + txtCEP.Text + " limit 1))";
+                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP = "+txtCEP.Text+" limit 1))";
 
                         }
                         else
                         {
-                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',(select idEndereco from endereco where CEP = " + txtCEP.Text + " limit 1))";
+                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP =  "+txtCEP.Text+" limit 1))";
 
                         }
                         MessageBox.Show("Dados pessoais inseridos com sucesso!!!");
@@ -55,16 +54,28 @@ namespace ExercicioAvaliacao
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+
+                }
+                try
+                {
+                    addEndereco();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
 
 
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             Mostrar();
             Limpar();
+
+            
 
         }
 
@@ -90,7 +101,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero Datetime = true";
                     cnx.Open();
-                    string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','" + txtCEP.Text + "')";
+                    string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','"+txtCEP.Text+"')";
                     MessageBox.Show("Endereco adicionado com sucesso !!!");
                     MySqlCommand cmd = new MySqlCommand(sql, cnx);
                     cmd.ExecuteNonQuery();
@@ -113,13 +124,14 @@ namespace ExercicioAvaliacao
                 using (MySqlConnection cnx = new MySqlConnection())
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
-                    cnx.Open();
-                    string sql = "select * from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
+                    cnx.Open(); 
+                    string sql = "select idContato,nome,cpf,dataNascimento,email,sexo,cep,logradouro,numeroCasa,complemento,bairro,cidade,uf from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
                     dgwContatos.DataSource = table;
                     dgwContatos.AutoGenerateColumns = false;
+                    
                 }
             }
             catch (Exception ex)
@@ -200,6 +212,9 @@ namespace ExercicioAvaliacao
             txtComplemento.Clear();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
