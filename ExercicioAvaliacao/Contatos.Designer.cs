@@ -190,6 +190,7 @@
             // 
             // txtLogradouro
             // 
+            this.txtLogradouro.Enabled = false;
             this.txtLogradouro.Location = new System.Drawing.Point(148, 255);
             this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4);
             this.txtLogradouro.Name = "txtLogradouro";
@@ -198,6 +199,7 @@
             // 
             // txtCidade
             // 
+            this.txtCidade.Enabled = false;
             this.txtCidade.Location = new System.Drawing.Point(148, 300);
             this.txtCidade.Margin = new System.Windows.Forms.Padding(4);
             this.txtCidade.Name = "txtCidade";
@@ -206,6 +208,7 @@
             // 
             // txtBairro
             // 
+            this.txtBairro.Enabled = false;
             this.txtBairro.Location = new System.Drawing.Point(449, 296);
             this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
             this.txtBairro.Name = "txtBairro";
@@ -219,6 +222,7 @@
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(159, 22);
             this.txtCEP.TabIndex = 10;
+            this.txtCEP.TextChanged += new System.EventHandler(this.txtCEP_TextChanged);
             // 
             // txtNumeroCasa
             // 
@@ -230,6 +234,7 @@
             // 
             // cmbUF
             // 
+            this.cmbUF.Enabled = false;
             this.cmbUF.FormattingEnabled = true;
             this.cmbUF.Location = new System.Drawing.Point(149, 333);
             this.cmbUF.Margin = new System.Windows.Forms.Padding(4);

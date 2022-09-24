@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Correios.Net;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,15 +19,19 @@ namespace ExercicioAvaliacao
         {
             InitializeComponent();
             Mostrar();
+
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
+
             Data();
             try
             {
+
                 try
                 {
+                    addEndereco();
                     using (MySqlConnection cnx = new MySqlConnection())
                     {
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero datetime = true";
@@ -34,12 +39,12 @@ namespace ExercicioAvaliacao
                         string sql;
                         if (rbMasculino.Checked)
                         {
-                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "')";
+                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',(select idEndereco from endereco where CEP = " + txtCEP.Text + " limit 1))";
 
                         }
                         else
                         {
-                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "')";
+                            sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',(select idEndereco from endereco where CEP = " + txtCEP.Text + " limit 1))";
 
                         }
                         MessageBox.Show("Dados pessoais inseridos com sucesso!!!");
@@ -50,25 +55,16 @@ namespace ExercicioAvaliacao
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-
-                }
-                try
-                {
-                    addEndereco();
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
                 }
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }          
+            }
             Mostrar();
+            Limpar();
 
         }
 
@@ -77,7 +73,7 @@ namespace ExercicioAvaliacao
             Telefones telefone = new Telefones();
             telefone.Show();
         }
-       
+
         void Data()
         {
             ClasseData.Data = dtpData.Value;
@@ -94,7 +90,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero Datetime = true";
                     cnx.Open();
-                    string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','"+txtCEP.Text+"')";
+                    string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','" + txtCEP.Text + "')";
                     MessageBox.Show("Endereco adicionado com sucesso !!!");
                     MySqlCommand cmd = new MySqlCommand(sql, cnx);
                     cmd.ExecuteNonQuery();
@@ -105,7 +101,7 @@ namespace ExercicioAvaliacao
                 MessageBox.Show(ex.Message);
 
             }
-            
+
 
 
         }
@@ -117,8 +113,8 @@ namespace ExercicioAvaliacao
                 using (MySqlConnection cnx = new MySqlConnection())
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
-                    cnx.Open(); 
-                    string sql = "select idContato,nome,cpf,dataNascimento,email,sexo,cep,logradouro,numeroCasa,complemento,bairro,cidade,uf from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
+                    cnx.Open();
+                    string sql = "select * from endereco inner join contato on endereco.idEndereco = contato.fkEndereco";
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
@@ -133,5 +129,77 @@ namespace ExercicioAvaliacao
         }
 
        
+
+        private void txtCEP_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string cep = txtCEP.Text;
+
+
+                using (MySqlConnection cnx = new MySqlConnection())
+                {
+                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                    cnx.Open();
+                    string sql = "select logradouro,bairro,cidade,uf from endereco where cep = '" + cep + "'";
+                    MySqlCommand cmd = new MySqlCommand(sql, cnx);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if ( reader.Read() )
+                    {
+
+                        string logradouro = reader["logradouro"].ToString();
+                        txtLogradouro.Text = logradouro;
+                        string bairro = reader["bairro"].ToString();
+                        txtBairro.Text = bairro;
+                        string cidade = reader["cidade"].ToString();
+                        txtCidade.Text = cidade;
+                        string uf = reader["uf"].ToString();
+                        cmbUF.Text = uf;
+
+                        txtLogradouro.Enabled = false;
+                        txtBairro.Enabled = false;
+                        txtCidade.Enabled = false;
+                        cmbUF.Enabled = false;
+                    }
+                    else
+                    {
+                        txtLogradouro.Clear();
+                        txtBairro.Clear();
+                        txtCidade.Clear();
+                        cmbUF.Text = null;
+                        txtLogradouro.Enabled = true;
+                        txtBairro.Enabled = true;
+                        txtCidade.Enabled = true;
+                        cmbUF.Enabled = true;
+                    }
+                }
+
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        void Limpar()
+        {
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtCPF.Clear();
+            txtCEP.Clear();
+            txtLogradouro.Clear();
+            txtCidade.Clear();
+            txtBairro.Clear();
+            cmbUF.Text = null;
+            rbMasculino.Checked = false;
+            rbFeminino.Checked = false;
+            txtNumeroCasa.Clear();
+            txtID.Clear();
+            txtComplemento.Clear();
+        }
+
+
     }
 }
