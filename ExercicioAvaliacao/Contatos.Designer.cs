@@ -206,7 +206,7 @@
             // 
             // txtCEP
             // 
-            this.txtCEP.Location = new System.Drawing.Point(142, 218);
+            this.txtCEP.Location = new System.Drawing.Point(142, 219);
             this.txtCEP.Margin = new System.Windows.Forms.Padding(4);
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(159, 22);
@@ -223,7 +223,6 @@
             // 
             // cmbUF
             // 
-            this.cmbUF.Enabled = false;
             this.cmbUF.FormattingEnabled = true;
             this.cmbUF.Location = new System.Drawing.Point(142, 333);
             this.cmbUF.Margin = new System.Windows.Forms.Padding(4);
@@ -244,13 +243,14 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(242, 27);
+            this.btnAlterar.Location = new System.Drawing.Point(247, 27);
             this.btnAlterar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(161, 34);
             this.btnAlterar.TabIndex = 0;
             this.btnAlterar.Text = "ALTERAR";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnDeletar
             // 
@@ -261,6 +261,7 @@
             this.btnDeletar.TabIndex = 0;
             this.btnDeletar.Text = "DELETAR";
             this.btnDeletar.UseVisualStyleBackColor = true;
+            this.btnDeletar.Click += new System.EventHandler(this.btnDeletar_Click);
             // 
             // dgwTelefones
             // 
@@ -299,6 +300,7 @@
             this.dgwContatos.RowHeadersWidth = 51;
             this.dgwContatos.Size = new System.Drawing.Size(920, 166);
             this.dgwContatos.TabIndex = 13;
+            this.dgwContatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwContatos_CellDoubleClick);
             // 
             // txtPesquisar
             // 
@@ -307,6 +309,7 @@
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(325, 22);
             this.txtPesquisar.TabIndex = 14;
+            this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
             // 
             // label11
             // 
