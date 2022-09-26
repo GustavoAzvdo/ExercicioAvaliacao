@@ -17,14 +17,11 @@ namespace ExercicioAvaliacao
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e) //Comando que levará o usuario a tela principal
         {
             Principal abrir = new Principal();
             abrir.Show();
             
-
-            
-
             
         }
     }

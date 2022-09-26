@@ -17,7 +17,7 @@ namespace ExercicioAvaliacao
         {
             InitializeComponent();
             MostrarPagar();
-            btnAlterar.Visible = false;
+            btnAlterar.Visible = false;                             
             btnDeletar.Visible = false;
         }
 
@@ -25,9 +25,9 @@ namespace ExercicioAvaliacao
         private void btnInserir_Click(object sender, EventArgs e)
         {
             verificaVazio();
-            Data();
+            Data();                      //Método de data onde ele vai pegar a data e transforma-la para o MySql poder ler.
 
-            if(btnInserir.Text == "INSERIR" && continua == "yes")
+            if(btnInserir.Text == "INSERIR" && continua == "yes")           //Se ambas as condições forem verdadeiras, ele continuará o código.
             {
                 if (MessageBox.Show("Deseja realmente inserir?", "INSERIR", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -37,7 +37,7 @@ namespace ExercicioAvaliacao
                         {
                             cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                             cnx.Open();
-                            string sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','Pagar','N/E','" + txtTipo.Text + "')";                           
+                            string sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','Pagar','N/E','" + txtTipo.Text + "')";       //Inserir dados na tabela 'contas'.                       
                             MessageBox.Show("Inserido com sucesso!");
                             MySqlCommand cmd = new MySqlCommand(sql, cnx);
                             cmd.ExecuteNonQuery();
@@ -52,16 +52,13 @@ namespace ExercicioAvaliacao
                     }
                    
                 }
-
                     
             }
-            MostrarPagar();
-            Limpar();
-
+            MostrarPagar();       //
+            Limpar();             // Depois de inserido ele limpa os campos e mostra a tabela atualizada.
            
         }
         
-
         private void btnAlterar_Click(object sender, EventArgs e)
         {
             verificaVazio();
@@ -76,7 +73,7 @@ namespace ExercicioAvaliacao
                     {
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update contas set nome = '" + txtNome.Text + "',descricao = '" + txtDescricao.Text + "',valor = '" + txtValor.Text + "',tipo = '" + txtTipo.Text + "', dataVencimento = '" + ClasseData.DataNova + "' where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "update contas set nome = '" + txtNome.Text + "',descricao = '" + txtDescricao.Text + "',valor = '" + txtValor.Text + "',tipo = '" + txtTipo.Text + "', dataVencimento = '" + ClasseData.DataNova + "' where idContasPagar = '" + txtIdContas.Text + "'";      //Alterar dados
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Atualizado com sucesso");
@@ -88,14 +85,9 @@ namespace ExercicioAvaliacao
                     MessageBox.Show(ex.Message);
                 }
 
-
             }
             MostrarPagar();
-            txtIdContas.Clear();
-            txtDescricao.Clear();
-            txtNome.Clear();
-            txtTipo.Clear();
-            txtValor.Clear();
+           
 
         }
 
@@ -109,7 +101,7 @@ namespace ExercicioAvaliacao
                     {
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "delete from contas where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "delete from contas where idContasPagar = '" + txtIdContas.Text + "'";  //Deleta os dados.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Deletado com sucesso!");
@@ -124,7 +116,7 @@ namespace ExercicioAvaliacao
                 }
             }
         }
-        void MostrarPagar()
+        void MostrarPagar()                                 //Esse metodo vai mostrar na dgw os dados da tabela 'contas' com uma condição; 
         {
             try
             {
@@ -132,7 +124,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select * from contas where situacao = 'Pagar'";
+                    string sql = "select * from contas where situacao = 'Pagar'";           //Vai mostrar os dados onde a situação seja igual a 'Pagar'
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
@@ -146,7 +138,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        private void dgwContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgwContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)              //Levar os dados do banco para o textBox definido.
         {
            
             if (dgwContasPagar.CurrentRow.Index != -1)
@@ -161,7 +153,7 @@ namespace ExercicioAvaliacao
 
                 string pago = cbPago.Text;
 
-                if (pago == "Pago")
+                if (pago == "Pago")             //Condição que vai checkar se no banco estiver escrito 'Pago', se não ele mudará a condição.
                 {
                     cbPago.Checked = true;
 
@@ -207,8 +199,6 @@ namespace ExercicioAvaliacao
             {
                 continua = "yes";
             }
-        }
-
-       
+        }      
     }
 }

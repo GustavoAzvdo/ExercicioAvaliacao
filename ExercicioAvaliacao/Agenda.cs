@@ -88,7 +88,7 @@ namespace ExercicioAvaliacao
                 txtIdAgenda.Text = dgwAgenda.CurrentRow.Cells[0].Value.ToString();
                 txtTitulo.Text = dgwAgenda.CurrentRow.Cells[1].Value.ToString();
                 cmbHora.Text = dgwAgenda.CurrentRow.Cells[2].Value.ToString(); 
-                dtpData.Value = Convert.ToDateTime(dgwAgenda.CurrentRow.Cells[3].Value.ToString());
+                dtpData.Value = Convert.ToDateTime(dgwAgenda.CurrentRow.Cells[3].Value.ToString());                        //Conversão de variavel para o DateTime.
                 rtbDescricao.Text = dgwAgenda.CurrentRow.Cells[4].Value.ToString();
 
                 btnInserir.Text = "ADD NEW";    
@@ -111,7 +111,7 @@ namespace ExercicioAvaliacao
                     {
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update agenda set hora = '" + cmbHora.Text + "',titulo = '" + txtTitulo.Text + "', descricao = '" + rtbDescricao.Text + "', data = '" + ClasseData.DataNova + "' where idAgenda = '" + txtIdAgenda.Text + "'";
+                        string sql = "update agenda set hora = '" + cmbHora.Text + "',titulo = '" + txtTitulo.Text + "', descricao = '" + rtbDescricao.Text + "', data = '" + ClasseData.DataNova + "' where idAgenda = '" + txtIdAgenda.Text + "'";         //Alterar dados da tabela 'agenda' onde o idAgenda seja igual ao textBox.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Atualizado com sucesso");
@@ -139,7 +139,7 @@ namespace ExercicioAvaliacao
                     {
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "delete from agenda where idAgenda = '" + txtIdAgenda.Text + "'";
+                        string sql = "delete from agenda where idAgenda = '" + txtIdAgenda.Text + "'";          //Comando do MySql que vai deletar a coluna do banco onde o ID seja igual ao textBox.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Deletado com sucesso!");

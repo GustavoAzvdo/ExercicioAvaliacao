@@ -16,22 +16,22 @@ namespace ExercicioAvaliacao
         public ControleContas()
         {
             InitializeComponent();
-            MostrarPagar();
-            MostrarReceber();
+            MostrarPagar();                 //Mostra as contas onde a situação é 'Pagar'.
+            MostrarReceber();               //Mostra as contas onde a situação é 'Receber'.
         }
 
         private void btnContasPagar_Click(object sender, EventArgs e)
         {
             ContasPagar contasPagar = new ContasPagar();
             //contasPagar.MdiParent = this;
-            contasPagar.Show();
+            contasPagar.Show();  //Ele voltará pro campo de cadastro de contas a pagar.
         }
 
         private void btnContasReceber_Click(object sender, EventArgs e)
         {
             ContasReceber contasreceber = new ContasReceber();
             //contasreceber.MdiParent = this;
-            contasreceber.Show();
+            contasreceber.Show();  //Ele voltara pro campo de cadastro de contas a receber.
         }
 
         void MostrarPagar()
@@ -42,7 +42,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select * from contas where situacao = 'Pagar' and pago_recebido = 'N/E'";
+                    string sql = "select * from contas where situacao = 'Pagar' and pago_recebido = 'N/E'"; //Mostra as contas se a situacao é 'Pagar' e o pago_recebido for 'N/E'.
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
@@ -63,7 +63,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select * from contas where situacao = 'Receber' and pago_recebido = 'N/E'";
+                    string sql = "select * from contas where situacao = 'Receber' and pago_recebido = 'N/E'"; //Mostra as contas se a situacao é 'Receber' e o pago_recebido for 'N/E'.
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
@@ -77,7 +77,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        private void dgwContasPagar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgwContasPagar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)       //O campo da tabela de ID vai para o txt ID
         {
             if (dgwContasPagar.CurrentRow.Index != -1)
             {
@@ -85,7 +85,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        private void dgwContasReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgwContasReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)      //O campo da tabela de ID vai para o txt ID
         {
             if (dgwContasReceber.CurrentRow.Index != -1)
             {
@@ -108,7 +108,7 @@ namespace ExercicioAvaliacao
                       
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update contas set pago_recebido = 'Pago', dataConclusao = NOW()  where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "update contas set pago_recebido = 'Pago', dataConclusao = NOW()  where idContasPagar = '" + txtIdContas.Text + "'"; //Comando que coloca o pago_recebido como 'Pago', inserindo no banco também a data de pagamento dessa conta.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Pagamento efetuado com sucesso!");
@@ -124,9 +124,7 @@ namespace ExercicioAvaliacao
 
             }
             MostrarPagar();
-
-            //ContasPagar cP = new ContasPagar();
-            //cP.Show();    
+   
 
         }
 
@@ -144,7 +142,7 @@ namespace ExercicioAvaliacao
                         
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "update contas set pago_recebido = 'Recebido',dataConclusao = NOW() where idContasPagar = '" + txtIdContas.Text + "'";
+                        string sql = "update contas set pago_recebido = 'Recebido',dataConclusao = NOW() where idContasPagar = '" + txtIdContas.Text + "'";  //Comando que coloca o pago_recebido como 'Recebido', inserindo no banco também a data de pagamento dessa conta.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Dinheiro recebido com sucesso!");

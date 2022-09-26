@@ -65,6 +65,7 @@
             this.rbMasculino = new System.Windows.Forms.RadioButton();
             this.rbFeminino = new System.Windows.Forms.RadioButton();
             this.txtCidade = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwTelefones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwContatos)).BeginInit();
             this.panel1.SuspendLayout();
@@ -431,11 +432,21 @@
             this.txtCidade.Size = new System.Drawing.Size(159, 22);
             this.txtCidade.TabIndex = 19;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(888, 354);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 37);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "ATUALIZAR";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Contatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 703);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtCidade);
             this.Controls.Add(this.rbFeminino);
             this.Controls.Add(this.rbMasculino);
@@ -518,5 +529,6 @@
         private System.Windows.Forms.RadioButton rbMasculino;
         private System.Windows.Forms.RadioButton rbFeminino;
         private System.Windows.Forms.TextBox txtCidade;
+        private System.Windows.Forms.Button button1;
     }
 }

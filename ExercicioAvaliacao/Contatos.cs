@@ -19,7 +19,7 @@ namespace ExercicioAvaliacao
         {
             InitializeComponent();
             Mostrar();
-            MostrarTelefone();
+            MostrarTelefone();          //Inicializa mostrando a tabela de telefones cadastrados.
             btnAlterar.Visible = false;
             btnDeletar.Visible = false;
 
@@ -39,7 +39,7 @@ namespace ExercicioAvaliacao
                     {
                         try
                         {
-                            addEndereco();
+                            addEndereco(); //Metodo que usa o insert para cadastrar o endereco no banco.
                             using (MySqlConnection cnx = new MySqlConnection())
                             {
                                 cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero datetime = true";
@@ -47,13 +47,13 @@ namespace ExercicioAvaliacao
                                 string sql;
                                 if (rbMasculino.Checked)
                                 {
-                                    sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP = " + txtCEP.Text + " limit 1))";
-
+                                    sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbMasculino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP = " + txtCEP.Text + " limit 1))"; //Ele pega o numero do idEndereco e joga no fkEndereco, onde o CEP for igual ao cadastrado no banco.(O LIMIT 1 serve para ele trazer somente um valor, evitando erros e bugs).
+                                    //Se o sexo estiver marcado como masculino ele executara essa linha
                                 }
                                 else
                                 {
-                                    sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP =  " + txtCEP.Text + " limit 1))";
-
+                                    sql = "insert into contato (nome,cpf,dataNascimento,email,sexo,numeroCasa,complemento,fkEndereco) values ('" + txtNome.Text + "','" + txtCPF.Text + "','" + ClasseData.DataNova + "','" + txtEmail.Text + "','" + rbFeminino.Text + "','" + txtNumeroCasa.Text + "','" + txtComplemento.Text + "',( select idEndereco from endereco where  CEP =  " + txtCEP.Text + " limit 1))"; //Ele pega o numero do idEndereco e joga no fkEndereco, onde o CEP for igual ao cadastrado no banco.(O LIMIT 1 serve para ele trazer somente um valor, evitando erros e bugs).
+                                    //Se não ele executara essa;
                                 }
                                 MessageBox.Show("Dados inseridos com sucesso!!!");
                                 MySqlCommand cmd = new MySqlCommand(sql, cnx);
@@ -80,17 +80,21 @@ namespace ExercicioAvaliacao
             Mostrar();
             Limpar();
 
-
-
-
-
-
         }
 
-        private void btnCadastrarTelefone_Click(object sender, EventArgs e)
+        private void btnCadastrarTelefone_Click(object sender, EventArgs e)        //Ele mostrará o form de cadastrar telefone transferindo o valor do txtID pro form de cadastro.
         {
+          
+
             Telefones telefone = new Telefones(txtID.Text);
             telefone.Show();
+            btnCadastrarTelefone.Text = "ATUALIZAR BANCO";
+            
+
+
+
+
+
         }
 
         void Data()
@@ -100,7 +104,7 @@ namespace ExercicioAvaliacao
             string[] vetData = dataCurta.Split('/');
             ClasseData.DataNova = $"{vetData[2]}-{vetData[1]}-{vetData[0]}";
         }
-        void addEndereco()
+        void addEndereco()                  //Metodo que insere o endereco no banco
         {
 
             try
@@ -149,22 +153,22 @@ namespace ExercicioAvaliacao
 
        
 
-        private void txtCEP_TextChanged(object sender, EventArgs e)
+        private void txtCEP_TextChanged(object sender, EventArgs e) //Metodo que será feito quando o texto entrar no textBox.
         {
             try
             {
-                string cep = txtCEP.Text;
+                string cep = txtCEP.Text; //O txt entra numa variavel.
 
 
                 using (MySqlConnection cnx = new MySqlConnection())
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select logradouro,bairro,cidade,uf from endereco where cep = '" + cep + "'";
+                    string sql = "select logradouro,bairro,cidade,uf from endereco where cep = '" + cep + "'"; //Essa string mostrara os dados da tabela endereco onde o CEP condiz com os dados.
                     MySqlCommand cmd = new MySqlCommand(sql, cnx);
                     MySqlDataReader reader = cmd.ExecuteReader();
 
-                    if ( reader.Read() )
+                    if ( reader.Read() )      //Esse comanddo pega a execução da string acima  e separa cada valor em uma variavel que vai entrar em seu textBox respectivamente.
                     {
 
                         string logradouro = reader["logradouro"].ToString();
@@ -182,7 +186,7 @@ namespace ExercicioAvaliacao
                         cmbUF.Enabled = false;
                         txtNumeroCasa.Clear();
                     }
-                    else
+                    else    //Se o CEP nao existir ele limpará os textBoxs e liberando eles para a digitação.
                     {
                         txtLogradouro.Clear();
                         txtBairro.Clear();
@@ -203,7 +207,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        void Limpar()
+        void Limpar()       //Limpa os rbs e txts do form.
         {
             txtNome.Clear();
             txtEmail.Clear();
@@ -250,15 +254,23 @@ namespace ExercicioAvaliacao
                     {
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnx.Open();
-                        string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','" + txtCEP.Text + "')";
+                        string sql = "insert into endereco (logradouro,cidade,bairro,UF,cep) values ('" + txtLogradouro.Text + "','" + txtCidade.Text + "','" + txtBairro.Text + "','" + cmbUF.Text + "','" + txtCEP.Text + "')"; //Esse comando faz que ao alterar o endereco da pessoa, o antigo não seja excluido, permanecendo os dados no banco
                         txtLogradouro.Enabled = false;
                         txtBairro.Enabled = false;
                         txtCidade.Enabled = false;
                         cmbUF.Enabled = false;
-                        string sql3 = "update contato set nome = '" + txtNome.Text + "',email = '" + txtEmail.Text + "', CPF = '" + txtCPF.Text + "', dataNascimento = '" + ClasseData.DataNova + "', numeroCasa = '"+txtNumeroCasa.Text +"', complemento = '"+txtComplemento.Text+ "', fkEndereco = ( select idEndereco from endereco where  CEP = '" + txtCEP.Text + "' limit 1) where idContato = '" + txtID.Text + "'";
-                        MySqlCommand cmd = new MySqlCommand(sql, cnx);
-                        cmd.ExecuteNonQuery();                      
-                        MySqlCommand cmd3 = new MySqlCommand(sql3, cnx);
+                        string sql3;  //Essa string verifica qual Radio Button está checkado para assim mudar a string e verificar se é Masculino ou Feminino, adicionando o sexo na tabela.
+                        if (rbMasculino.Checked)
+                        {
+                            sql3 = "update contato set nome = '" + txtNome.Text + "',email = '" + txtEmail.Text + "', CPF = '" + txtCPF.Text + "', dataNascimento = '" + ClasseData.DataNova + "', sexo = '" + rbMasculino.Text + "' ,numeroCasa = '" + txtNumeroCasa.Text + "', complemento = '" + txtComplemento.Text + "', fkEndereco = ( select idEndereco from endereco where  CEP = '" + txtCEP.Text + "' limit 1) where idContato = '" + txtID.Text + "'";
+                        }
+                        else
+                        {
+                            sql3 = "update contato set nome = '" + txtNome.Text + "',email = '" + txtEmail.Text + "', CPF = '" + txtCPF.Text + "', dataNascimento = '" + ClasseData.DataNova + "', sexo = '" + rbFeminino.Text + "',numeroCasa = '" + txtNumeroCasa.Text + "', complemento = '" + txtComplemento.Text + "', fkEndereco = ( select idEndereco from endereco where  CEP = '" + txtCEP.Text + "' limit 1) where idContato = '" + txtID.Text + "'";
+                        }
+                        MySqlCommand cmd = new MySqlCommand(sql, cnx);              // 
+                        cmd.ExecuteNonQuery();                                      //  Comando que executará as strings 
+                        MySqlCommand cmd3 = new MySqlCommand(sql3, cnx);            //
                         cmd3.ExecuteNonQuery();
                         MessageBox.Show("Atualizado com sucesso");
                     }
@@ -272,7 +284,7 @@ namespace ExercicioAvaliacao
 
         }
 
-        private void dgwContatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgwContatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //Metodo que pega os dados da tabela e joga nos textBoxs
         {
             if (dgwContatos.CurrentRow.Index != -1)
             {
@@ -309,7 +321,7 @@ namespace ExercicioAvaliacao
                 btnAlterar.Visible = true;
                 
             }
-            MostrarTelefone();
+            MostrarTelefone();  
         }
 
         private void btnDeletar_Click(object sender, EventArgs e)
@@ -322,7 +334,7 @@ namespace ExercicioAvaliacao
                     {
                         cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                         cnn.Open();
-                        string sql = "delete from contato where idContato = '" + txtID.Text + "'";
+                        string sql = "delete from contato where idContato = '" + txtID.Text + "'"; //Deleta os dados do idContato.
                         MySqlCommand cmd = new MySqlCommand(sql, cnn);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Deletado com sucesso!");
@@ -347,7 +359,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select * from contato where nome like '" + txtPesquisar.Text + "%'";
+                    string sql = "select * from contato where nome like '" + txtPesquisar.Text + "%'"; //Foi usado o like para a pesquisa por nomes.
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);
@@ -368,7 +380,7 @@ namespace ExercicioAvaliacao
                 {
                     cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
                     cnx.Open();
-                    string sql = "select DDD,numero,operadora from telefone inner join contato where contato.idContato = telefone.fkContato and idContato = '"+txtID.Text+"'";
+                    string sql = "select DDD,numero,operadora from telefone inner join contato where contato.idContato = telefone.fkContato and idContato = '"+txtID.Text+"'"; //Mostra a tabela de telefones cadastrados, fazendo que cada Id mostre o telefone cadastrado no mesmo
                     DataTable table = new DataTable();
                     MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                     adapter.Fill(table);

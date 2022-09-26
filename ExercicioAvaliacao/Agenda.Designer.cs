@@ -140,7 +140,7 @@
             // dgwAgenda
             // 
             this.dgwAgenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwAgenda.Location = new System.Drawing.Point(25, 90);
+            this.dgwAgenda.Location = new System.Drawing.Point(44, 79);
             this.dgwAgenda.Margin = new System.Windows.Forms.Padding(4);
             this.dgwAgenda.Name = "dgwAgenda";
             this.dgwAgenda.RowHeadersWidth = 51;

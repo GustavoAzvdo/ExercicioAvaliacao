@@ -197,7 +197,7 @@
             // 
             this.cbPago.AutoSize = true;
             this.cbPago.Enabled = false;
-            this.cbPago.Location = new System.Drawing.Point(1043, 229);
+            this.cbPago.Location = new System.Drawing.Point(1035, 228);
             this.cbPago.Margin = new System.Windows.Forms.Padding(4);
             this.cbPago.Name = "cbPago";
             this.cbPago.Size = new System.Drawing.Size(62, 20);

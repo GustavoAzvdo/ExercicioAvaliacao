@@ -66,7 +66,7 @@ namespace ExercicioAvaliacao
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
                         cnx.Open();
                         string ID = txtID.Text;
-                        string sql = "update telefone set DDD = '" + txtDDD.Text + "', operadora = '" + cmbOperadora.Text + "', numero = '" + txtNumero.Text + "' where idTelefone = '" + txtIdTelefone.Text + "'";
+                        string sql = "update telefone set DDD = '" + txtDDD.Text + "', operadora = '" + cmbOperadora.Text + "', numero = '" + txtNumero.Text + "' where idTelefone = '" + txtIdTelefone.Text + "'"; //Adiciona um novo telefone daquele contato (fkContato).
                         MySqlCommand cmd = new MySqlCommand(sql, cnx);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Telefone alterado!");
@@ -133,7 +133,7 @@ namespace ExercicioAvaliacao
         {
             InitializeComponent();
             txtID.Text = idContatos;
-            Mostrar();
+            Mostrar();  //O metodo Mostrar vem junto com o valor da variavel, para funcionar a visualização do banco.
         }
 
         private void dgwTelefones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
