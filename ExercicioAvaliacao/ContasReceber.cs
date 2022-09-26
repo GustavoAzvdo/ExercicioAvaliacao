@@ -26,29 +26,34 @@ namespace ExercicioAvaliacao
         {
             verificaVazio();
             Data();
-            try
-            {
-                using (MySqlConnection cnx = new MySqlConnection())
-                {
-                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
-                    cnx.Open();
-                    string sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','Receber','N/E','" + txtTipo.Text + "')";
-                    MessageBox.Show("Inserido com sucesso!");
-                    MySqlCommand cmd = new MySqlCommand(sql, cnx);
-                    cmd.ExecuteNonQuery();
 
+            if (btnInserir.Text == "INSERIR" && continua == "yes")
+            {
+                try
+                {
+                    using (MySqlConnection cnx = new MySqlConnection())
+                    {
+                        cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                        cnx.Open();
+                        string sql = "insert into contas (nome,descricao,valor,dataVencimento,situacao,pago_recebido,tipo) values ('" + txtNome.Text + "','" + txtDescricao.Text + "','" + txtValor.Text + "','" + ClasseData.DataNova + "','Receber','N/E','" + txtTipo.Text + "')";
+                        MessageBox.Show("Inserido com sucesso!");
+                        MySqlCommand cmd = new MySqlCommand(sql, cnx);
+                        cmd.ExecuteNonQuery();
+
+
+                    }
 
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+           
             MostrarReceber();
             Limpar();
 
-        }            
+        }
         private void btnDeletar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Deseja realmente deletar?", "Deletar", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -80,35 +85,40 @@ namespace ExercicioAvaliacao
             verificaVazio();
             Data();
 
-            if (btnInserir.Text == "INSERIR" && continua == "yes")
+
+            if (MessageBox.Show("Deseja realmente alterar?", "ALTERAR", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (MessageBox.Show("Deseja realmente alterar?", "ALTERAR", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+                try
                 {
-
-                    try
+                    using (MySqlConnection cnn = new MySqlConnection())
                     {
-                        using (MySqlConnection cnn = new MySqlConnection())
-                        {
-                            cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
-                            cnn.Open();
-                            string sql = "update contas set nome = '" + txtNome.Text + "',descricao = '" + txtDescricao.Text + "',valor = '" + txtValor.Text + "',tipo = '" + txtTipo.Text + "', dataVencimento = '" + ClasseData.DataNova + "' where idContasPagar = '" + txtIdContas.Text + "'";
-                            MySqlCommand cmd = new MySqlCommand(sql, cnn);
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Atualizado com sucesso");
+                        cnn.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306;Convert Zero DateTime = true";
+                        cnn.Open();
+                        string sql = "update contas set nome = '" + txtNome.Text + "',descricao = '" + txtDescricao.Text + "',valor = '" + txtValor.Text + "',tipo = '" + txtTipo.Text + "', dataVencimento = '" + ClasseData.DataNova + "' where idContasPagar = '" + txtIdContas.Text + "'";
+                        MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Atualizado com sucesso");
 
-                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             MostrarReceber();
-            Limpar();
 
-            
+            txtIdContas.Clear();
+            txtDescricao.Clear();
+            txtNome.Clear();
+            txtTipo.Clear();
+            txtValor.Clear();
+
+
+
+
         }
         void Limpar()
         {
@@ -194,6 +204,6 @@ namespace ExercicioAvaliacao
             }
         }
 
-     
+
     }
 }

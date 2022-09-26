@@ -16,19 +16,19 @@ namespace ExercicioAvaliacao
         public Agenda()
         {
             InitializeComponent();
-            Mostrar();
-            btnAlterar.Visible = false;            
-            btnDeletar.Visible = false;
+            Mostrar();                                          //
+            btnAlterar.Visible = false;                         // Comandos que vão ser inicializados junto com o código.
+            btnDeletar.Visible = false;                         //
 
         }
         
 
-        string continua = "yes";
+        string continua = "yes";                                // variavel ja começa com o valor 'yes'.    
         private void btnInserir_Click(object sender, EventArgs e)
         {
 
-            Data();
-            verificaVazio();
+            Data();                                             // Metodo que le a data e transforma ela do jeito que o MySql aceita.
+            verificaVazio();                                    // Verifica se os campos estão preenchidos.
 
             if(btnInserir.Text == "INSERIR" && continua == "yes")
             {
@@ -42,7 +42,7 @@ namespace ExercicioAvaliacao
                             cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
                             cnx.Open();
                             string sql = "insert into agenda (titulo,hora,data,descricao) values ('" + txtTitulo.Text + "','" + cmbHora.Text + "','" + ClasseData.DataNova + "','" + rtbDescricao.Text + "')";
-                            MessageBox.Show("Inserido com sucesso!");
+                            MessageBox.Show("Inserido com sucesso!");                                                                            //Variavel global da data nova.
                             MySqlCommand cmd = new MySqlCommand(sql, cnx);
                             cmd.ExecuteNonQuery();
                         }
@@ -57,9 +57,9 @@ namespace ExercicioAvaliacao
                 
             }
             Mostrar();
-            Limpar();
+            Limpar();                //Depois de inserir os dados, os campos se limpam.
         }
-        void Mostrar()
+        void Mostrar()              //Mostrar os dados da tabela agenda do banco 
         {
             try
             {
@@ -81,7 +81,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        private void dgwAgenda_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgwAgenda_CellDoubleClick(object sender, DataGridViewCellEventArgs e)                                  //Método de double click no valor da tabela ir nos campos.
         {
             if (dgwAgenda.CurrentRow.Index != -1)
             {
@@ -98,7 +98,7 @@ namespace ExercicioAvaliacao
             }
         }
 
-        private void btnAlterar_Click(object sender, EventArgs e)
+        private void btnAlterar_Click(object sender, EventArgs e)       //Alterar dados do banco da tabela agenda.
         {
             Data();
 
@@ -129,7 +129,7 @@ namespace ExercicioAvaliacao
             
         }
 
-        private void btnDeletar_Click(object sender, EventArgs e)
+        private void btnDeletar_Click(object sender, EventArgs e)                       //Deletar dados da tabela agenda do banco. 
         {
             if(MessageBox.Show("Deseja realmente deletar?","Deletar",MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -156,7 +156,7 @@ namespace ExercicioAvaliacao
            
         }
         
-        void verificaVazio()
+        void verificaVazio()                        //Se algum dos campos estiverem vazios, ele irá falar pra você preencher os campos.
         {
             if (cmbHora.Text == "" || txtTitulo.Text == "" || rtbDescricao.Text == "")
             {
@@ -168,7 +168,7 @@ namespace ExercicioAvaliacao
                 continua = "yes";
             }
         }
-        void Limpar()
+        void Limpar()                               //Metodo que limpa os campos depois de inserir/deletar algum dado.
         {
             
             txtIdAgenda.Clear();
@@ -183,7 +183,7 @@ namespace ExercicioAvaliacao
 
 
         }
-        void Data()
+        void Data()                                 //Método que pega a data e modifica para o MySql ler.
         {
             ClasseData.Data = dtpData.Value;
             string dataCurta = ClasseData.Data.ToShortDateString();
@@ -207,7 +207,7 @@ namespace ExercicioAvaliacao
                     {
                         cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
                         cnx.Open();
-                        string sql = "select * from agenda where titulo like '" + txtPesquisar.Text + "%'";
+                        string sql = "select * from agenda where titulo like '" + txtPesquisar.Text + "%'";         //Ele vai pesquisar por 'titulo' e vai pegar todos os campos que começam pela letra que está no textBox.
                         DataTable table = new DataTable();
                         MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
                         adapter.Fill(table);

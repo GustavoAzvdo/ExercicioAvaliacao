@@ -26,7 +26,7 @@ namespace ExercicioAvaliacao
         {
 
             verificaVazio();
-            if (btnInserir.Text == "INSERIR" && continua == "yes")
+            if (btnInserir.Text == "INSERIR" && continua == "yes")        //Ele só dara continuidade no botão inserir tiver essas duas condições verdadeiras.
             {
                 if (MessageBox.Show("Deseja realmente inserir?", "INSERIR", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -36,8 +36,8 @@ namespace ExercicioAvaliacao
                         {
                             cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306";
                             cnx.Open();
-                            string ID = txtID.Text;
-                            string sql = "insert into telefone (fkContato, operadora, ddd, numero) values  ('" + txtID.Text + "','" + cmbOperadora.Text + "','" + txtDDD.Text + "','" + txtNumero.Text + "')";
+                            string ID = txtID.Text; //Transforma o textBox 'txtID' em variavel.
+                            string sql = "insert into telefone (fkContato, operadora, ddd, numero) values  ('" + txtID.Text + "','" + cmbOperadora.Text + "','" + txtDDD.Text + "','" + txtNumero.Text + "')"; //Inserir o telefone.
                             MySqlCommand cmd = new MySqlCommand(sql, cnx);
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Telefone cadastrado!");
@@ -55,7 +55,7 @@ namespace ExercicioAvaliacao
             Limpar();
         }
 
-        private void btnAlterar_Click(object sender, EventArgs e)
+        private void btnAlterar_Click(object sender, EventArgs e)   //Altera os telefones inseridos
         {
             if (MessageBox.Show("Deseja realmente Alterar?", "ALTERAR", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -78,10 +78,10 @@ namespace ExercicioAvaliacao
                 }
 
             }
-            Mostrar();
+            Mostrar();  //Mostra o telefone alterado.
         }
 
-        private void btnDeletar_Click(object sender, EventArgs e)
+        private void btnDeletar_Click(object sender, EventArgs e)           //Deleta o telefone escolhido.
         {
             if (MessageBox.Show("Deseja realmente deletar?", "Deletar", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -129,7 +129,7 @@ namespace ExercicioAvaliacao
                 MessageBox.Show(ex.Message);
             }
         }
-        public Telefones(string idContatos)
+        public Telefones(string idContatos)             //Pega o textBox do form 'Contatos' e joga o valor no form 'Telefones'.
         {
             InitializeComponent();
             txtID.Text = idContatos;

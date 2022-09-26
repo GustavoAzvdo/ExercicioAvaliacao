@@ -90,6 +90,7 @@ namespace ExercicioAvaliacao
 
 
             }
+            MostrarPagar();
             txtIdContas.Clear();
             txtDescricao.Clear();
             txtNome.Clear();
