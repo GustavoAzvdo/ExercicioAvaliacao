@@ -168,6 +168,7 @@ namespace ExercicioAvaliacao
             txtNumero.Clear();
             txtIdTelefone.Clear();
             txtIdTelefone.Clear();
+            cmbOperadora.Text = " ";
 
             btnInserir.Text = "INSERIR";
             btnDeletar.Visible = false;
