@@ -91,6 +91,7 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(57, 20);
             this.txtID.TabIndex = 5;
+
             // 
             // txtDDD
             // 
@@ -178,7 +179,7 @@
             // 
             this.txtIdTelefone.Enabled = false;
             this.txtIdTelefone.Location = new System.Drawing.Point(136, 18);
-            this.txtIdTelefone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdTelefone.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdTelefone.Name = "txtIdTelefone";
             this.txtIdTelefone.Size = new System.Drawing.Size(57, 20);
             this.txtIdTelefone.TabIndex = 15;

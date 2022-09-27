@@ -137,7 +137,7 @@
             // 
             this.txtIdContas.Enabled = false;
             this.txtIdContas.Location = new System.Drawing.Point(736, 56);
-            this.txtIdContas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdContas.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdContas.Name = "txtIdContas";
             this.txtIdContas.Size = new System.Drawing.Size(41, 20);
             this.txtIdContas.TabIndex = 8;
@@ -145,10 +145,11 @@
             // txtPesquisa2
             // 
             this.txtPesquisa2.Location = new System.Drawing.Point(616, 268);
-            this.txtPesquisa2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPesquisa2.Margin = new System.Windows.Forms.Padding(2);
             this.txtPesquisa2.Name = "txtPesquisa2";
             this.txtPesquisa2.Size = new System.Drawing.Size(160, 20);
             this.txtPesquisa2.TabIndex = 9;
+            this.txtPesquisa2.TextChanged += new System.EventHandler(this.txtPesquisa2_TextChanged);
             // 
             // label4
             // 
@@ -173,10 +174,11 @@
             // txtPesquisa
             // 
             this.txtPesquisa.Location = new System.Drawing.Point(616, 92);
-            this.txtPesquisa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPesquisa.Margin = new System.Windows.Forms.Padding(2);
             this.txtPesquisa.Name = "txtPesquisa";
             this.txtPesquisa.Size = new System.Drawing.Size(160, 20);
             this.txtPesquisa.TabIndex = 9;
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
             // 
             // ControleContas
             // 

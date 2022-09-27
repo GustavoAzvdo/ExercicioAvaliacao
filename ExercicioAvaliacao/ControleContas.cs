@@ -158,7 +158,51 @@ namespace ExercicioAvaliacao
             }
              MostrarReceber();
         }
-       
-        
+
+        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (MySqlConnection cnx = new MySqlConnection())
+                {
+                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                    cnx.Open();
+                    string sql = "select * from contas where nome like '"+txtPesquisa.Text +"%' and pago_recebido = 'N/E' and situacao = 'Pagar';";         //Ele vai pesquisar por 'nome' e vai pegar todos os campos que começam pela letra que está no textBox.
+                    DataTable table = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
+                    adapter.Fill(table);
+                    dgwContasPagar.DataSource = table;
+                    dgwContasPagar.AutoGenerateColumns = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtPesquisa2_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (MySqlConnection cnx = new MySqlConnection())
+                {
+                    cnx.ConnectionString = "server = localhost; database = controle; uid = root; pwd =; port = 3306; Convert Zero DateTime = true";
+                    cnx.Open();
+                    string sql = "select * from contas where nome like '" + txtPesquisa.Text + "%' and pago_recebido = 'N/E' and situacao = 'Receber'";         //Ele vai pesquisar por 'nome' e vai pegar todos os campos que começam pela letra que está no textBox.
+                    DataTable table = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(sql, cnx);
+                    adapter.Fill(table);
+                    dgwContasReceber.DataSource = table;
+                    dgwContasReceber.AutoGenerateColumns = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

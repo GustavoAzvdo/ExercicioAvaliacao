@@ -22,6 +22,7 @@ namespace ExercicioAvaliacao
             MostrarTelefone();          //Inicializa mostrando a tabela de telefones cadastrados.
             btnAlterar.Visible = false;
             btnDeletar.Visible = false;
+            btnAtualizar.Visible = false;
 
         }
         string continua = "yes";
@@ -88,13 +89,9 @@ namespace ExercicioAvaliacao
 
             Telefones telefone = new Telefones(txtID.Text);
             telefone.Show();
-            btnCadastrarTelefone.Text = "ATUALIZAR BANCO";
-            
+            btnAtualizar.Visible = true; 
 
-
-
-
-
+          
         }
 
         void Data()
@@ -392,6 +389,19 @@ namespace ExercicioAvaliacao
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            MostrarTelefone();
+            btnAtualizar.Visible = false;
+
+        }
+
+        private void dgwTelefones_MouseDown(object sender, MouseEventArgs e)
+        {
+            MostrarTelefone();
         }
     }
 }

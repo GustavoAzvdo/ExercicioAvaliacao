@@ -18,6 +18,7 @@ namespace ExercicioAvaliacao
             InitializeComponent();
             btnDeletar.Visible = false;
             btnAlterar.Visible = false;
+            
         }
 
         string continua = "yes";
@@ -53,6 +54,7 @@ namespace ExercicioAvaliacao
             }
             Mostrar();
             Limpar();
+            Close();
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)   //Altera os telefones inseridos
@@ -174,5 +176,7 @@ namespace ExercicioAvaliacao
             btnDeletar.Visible = false;
             btnAlterar.Visible = false;
         }
+
+      
     }
 }
